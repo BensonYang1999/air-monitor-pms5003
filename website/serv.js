@@ -8,7 +8,7 @@ var data = [];
 
 app.use(express.static(__dirname + "/public"));
 
-app.get(recv_data, (req, res) => {
+app.get("/recv_data", (req, res) => {
     var new_data = {
         pm10_standard: req.query.pm10_standard,
         pm25_standard: req.query.pm25_standard,
@@ -48,3 +48,6 @@ io.sockets.on("connection", socket => {
     var address = socket.handshake.address;
     console.log(`New client page from ${address}, id=${socket.id}`);
 })
+
+
+server.listen(port, () => console.log(`Server is running on port ${port}`));
