@@ -4,7 +4,7 @@
 
 #define WIFI_SEND_URL "http://220.135.93.231:1234/recv_data"
 
-SoftwareSerial pmsSerial(0, 2); //RX TX
+SoftwareSerial pmsSerial(13, 15); //RX TX
 
 const char *ssid = "2.4G";
 const char *password = "12345qwert";
@@ -56,36 +56,36 @@ void loop()
   {
     // reading data was successful!
     Serial.println();
-    Serial.println("---------------------------------------");
-    Serial.println("Concentration Units (standard)");
-    Serial.print("PM 1.0: ");
+    Serial.println(F("---------------------------------------"));
+    Serial.println(F("Concentration Units (standard)"));
+    Serial.print(F("PM 1.0: "));
     Serial.print(data.pm10_standard);
-    Serial.print("\t\tPM 2.5: ");
+    Serial.print(F("\t\tPM 2.5: "));
     Serial.print(data.pm25_standard);
-    Serial.print("\t\tPM 10: ");
+    Serial.print(F("\t\tPM 10: "));
     Serial.println(data.pm100_standard);
-    Serial.println("---------------------------------------");
-    Serial.println("Concentration Units (environmental)");
-    Serial.print("PM 1.0: ");
+    Serial.println(F("---------------------------------------"));
+    Serial.println(F("Concentration Units (environmental)"));
+    Serial.print(F("PM 1.0: "));
     Serial.print(data.pm10_env);
-    Serial.print("\t\tPM 2.5: ");
+    Serial.print(F("\t\tPM 2.5: "));
     Serial.print(data.pm25_env);
-    Serial.print("\t\tPM 10: ");
+    Serial.print(F("\t\tPM 10: "));
     Serial.println(data.pm100_env);
-    Serial.println("---------------------------------------");
-    Serial.print("Particles > 0.3um / 0.1L air:");
+    Serial.println(F("---------------------------------------"));
+    Serial.print(F("Particles > 0.3um / 0.1L air:"));
     Serial.println(data.particles_03um);
-    Serial.print("Particles > 0.5um / 0.1L air:");
+    Serial.print(F("Particles > 0.5um / 0.1L air:"));
     Serial.println(data.particles_05um);
-    Serial.print("Particles > 1.0um / 0.1L air:");
+    Serial.print(F("Particles > 1.0um / 0.1L air:"));
     Serial.println(data.particles_10um);
-    Serial.print("Particles > 2.5um / 0.1L air:");
+    Serial.print(F("Particles > 2.5um / 0.1L air:"));
     Serial.println(data.particles_25um);
-    Serial.print("Particles > 5.0um / 0.1L air:");
+    Serial.print(F("Particles > 5.0um / 0.1L air:"));
     Serial.println(data.particles_50um);
-    Serial.print("Particles > 10.0 um / 0.1L air:");
+    Serial.print(F("Particles > 10.0 um / 0.1L air:"));
     Serial.println(data.particles_100um);
-    Serial.println("---------------------------------------");
+    Serial.println(F("---------------------------------------"));
 
     if (WiFi.status() == WL_CONNECTED)
     {
@@ -113,7 +113,7 @@ void loop()
     }
   }
 
-  delay(1000);
+  delay(2000);
 }
 
 boolean readPMSdata(Stream *s)
