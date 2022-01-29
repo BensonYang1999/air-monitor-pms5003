@@ -2,7 +2,7 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 
-#define WIFI_SEND_URL "http://220.135.93.231:1234/get_effect"
+#define WIFI_SEND_URL "http://220.135.93.231:1234/recv_data"
 
 SoftwareSerial pmsSerial(0, 2); //RX TX
 
@@ -86,27 +86,33 @@ void loop()
     Serial.print("Particles > 10.0 um / 0.1L air:");
     Serial.println(data.particles_100um);
     Serial.println("---------------------------------------");
-  }
-  if(WiFi.status() == WL_CONNECTED)
-  {
-    String url = String(WIFI_SEND_URL);
-    url += "?pm10_standard=" + data.pm10_standard;
-    url += "&pm25_standard=" + data.pm25_standard;
-    url += "&pm100_standard=" + data.pm100_standard;
-    url += "&pm10_env=" + data.pm10_env;
-    url += "&pm25_env=" + data.pm25_env;
-    url += "&pm100_env=" + data.pm100_env;
-    url += "&particles_03um=" + data.particles_03um;
-    url += "&particles_05um=" + data.particles_05um;
-    url += "&particles_10um=" + data.particles_10um;
-    url += "?particles_25um=" + data.particles_25um;
-    url += "&particles_50um=" + data.particles_50um;
-    url += "&particles_100um=" + data.particles_100um;
 
-    http.begin(client, url);
-    int httpCode = http.GET();
-    http.end();
+    if (WiFi.status() == WL_CONNECTED)
+    {
+      String url = String(WIFI_SEND_URL);
+      url += "?pm10_standard=" + String(data.pm10_standard);
+      url += "&pm25_standard=" + String(data.pm25_standard);
+      url += "&pm100_standard=" + String(data.pm100_standard);
+      url += "&pm10_env=" + String(data.pm10_env);
+      url += "&pm25_env=" + String(data.pm25_env);
+      url += "&pm100_env=" + String(data.pm100_env);
+      url += "&particles_03um=" + String(data.particles_03um);
+      url += "&particles_05um=" + String(data.particles_05um);
+      url += "&particles_10um=" + String(data.particles_10um);
+      url += "&particles_25um=" + String(data.particles_25um);
+      url += "&particles_50um=" + String(data.particles_50um);
+      url += "&particles_100um=" + String(data.particles_100um);
+
+      Serial.println();
+      Serial.print("url:");
+      Serial.println(url);
+
+      http.begin(client, url);
+      int httpCode = http.GET();
+      http.end();
+    }
   }
+
   delay(1000);
 }
 
