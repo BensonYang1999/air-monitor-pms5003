@@ -165,7 +165,7 @@ const chart_temp = new Chart(ctx_temp, {
             fill: false,
             borderColor: "rgba(255,0,0,1.0)",
         }, {
-            label: 'Pressure (hPa) (/100)',
+            label: 'Pressure (hPa)',
             fill: false,
             borderColor: "rgba(0,255,0,1.0)",
         }, {

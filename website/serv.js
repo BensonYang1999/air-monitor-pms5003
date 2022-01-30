@@ -61,7 +61,7 @@ app.get("/recv_data", (req, res) => {
 app.get("/recv_temp", (req, res) => {
     var new_data = [
         parseFloat(req.query.temperature),
-        parseFloat(req.query.pressure) / 100,
+        parseFloat(req.query.pressure),
         parseFloat(req.query.altitude)
     ]
     console.log(new_data);
