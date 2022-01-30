@@ -1,10 +1,7 @@
-#include <SoftwareSerial.h>
-#include <ESP8266WiFi.h>
-#include <ESP8266HTTPClient.h>
+#include <WiFi.h>
+#include <HTTPClient.h>
 
 #define WIFI_SEND_URL "http://220.135.93.231:1234/recv_data"
-
-SoftwareSerial pmsSerial(13, 15); //RX TX
 
 const char *ssid = "2.4G";
 const char *password = "12345qwert";
@@ -17,7 +14,7 @@ void setup()
   Serial.begin(115200);
 
   // sensor baud rate is 9600
-  pmsSerial.begin(9600);
+  Serial2.begin(9600);
 
   // Connect to Wi-Fi network with SSID and password
   Serial.println("");
@@ -48,12 +45,12 @@ struct pms5003data
 };
 
 struct pms5003data data;
-WiFiClient client;
+//WiFiClient client;
 HTTPClient http;
 
 void loop()
 {
-  if (readPMSdata(&pmsSerial))
+  if (readPMSdata(&Serial2))
   {
     // reading data was successful!
     Serial.println();
@@ -108,7 +105,7 @@ void loop()
       Serial.print("url:");
       Serial.println(url);
 
-      http.begin(client, url);
+      http.begin(url);
       int httpCode = http.GET();
       http.end();
     }

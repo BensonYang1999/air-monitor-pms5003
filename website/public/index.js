@@ -33,15 +33,15 @@ const history = new Chart(ctx, {
             fill: false,
             borderColor: "rgba(0,255,140,1.0)",
         },{
-            label: 'Particles > 0.3um',
+            label: 'Particles > 0.3um (/100)',
             fill: false,
             borderColor: "rgba(0,255,255,1.0)",
         },{
-            label: 'Particles > 0.5um',
+            label: 'Particles > 0.5um (/100)',
             fill: false,
             borderColor: "rgba(0,0,255,1.0)",
         },{
-            label: 'Particles > 1.0um',
+            label: 'Particles > 1.0um (/10)',
             fill: false,
             borderColor: "rgba(110,0,255,1.0)",
         },{

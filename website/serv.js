@@ -30,9 +30,9 @@ app.get("/recv_data", (req, res) => {
         parseInt(req.query.pm10_env),
         parseInt(req.query.pm25_env),
         parseInt(req.query.pm100_env),
-        parseInt(req.query.particles_03um),
-        parseInt(req.query.particles_05um),
-        parseInt(req.query.particles_10um),
+        parseInt(req.query.particles_03um) / 100,
+        parseInt(req.query.particles_05um) / 100,
+        parseInt(req.query.particles_10um) / 10,
         parseInt(req.query.particles_25um),
         parseInt(req.query.particles_50um),
         parseInt(req.query.particles_100um)
