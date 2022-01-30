@@ -3,8 +3,9 @@ const socket = io.connect(window.location.origin);
 var xValues = []
 var data_count = 0;
 
-//const ctx = document.getElementById('Chart1').getContext('2d');
-const chart_1 = new Chart('Chart1', {
+const ctx1 = document.getElementById('Chart1').getContext('2d');
+const ctx2 = document.getElementById('Chart1').getContext('2d');
+const chart_1 = new Chart(ctx1, {
     type: "line",
     data: {
         labels: xValues,
@@ -78,7 +79,7 @@ const chart_1 = new Chart('Chart1', {
         }*/
     }
 });
-const chart_2 = new Chart('Chart2', {
+const chart_2 = new Chart(ctx2, {
     type: "line",
     data: {
         labels: xValues,
