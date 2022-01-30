@@ -59,10 +59,10 @@ const history = new Chart(ctx, {
         }]
     },
     options: {
-        legend: { display: false },
-        /*scales: {
+        legend: { display: false }/*,
+        scales: {
             yAxes: [{ ticks: { min: 6, max: 16 } }],
-        },*/
+        },
         plugins: {
             zoom: {
                 zoom: {
@@ -75,7 +75,7 @@ const history = new Chart(ctx, {
                     mode: 'xy',
                 }
             }
-        }
+        }*/
     }
 });
 
