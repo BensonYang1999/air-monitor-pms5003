@@ -2,7 +2,10 @@ const socket = io.connect(window.location.origin);
 
 var xValues = []
 var data_count = 0;
+var x_temp = []
+var temp_count = 0;
 
+const ctx_temp = document.getElementById('Chart_temp').getContext('2d');
 const ctx1 = document.getElementById('Chart1').getContext('2d');
 const ctx2 = document.getElementById('Chart2').getContext('2d');
 const chart_1 = new Chart(ctx1, {
@@ -153,6 +156,28 @@ const chart_2 = new Chart(ctx2, {
         }*/
     }
 });
+const chart_temp = new Chart(ctx_temp, {
+    type: "line",
+    data: {
+        labels: x_temp,
+        datasets: [{
+            label: 'Temperature',
+            fill: false,
+            borderColor: "rgba(255,0,0,1.0)",
+        }, {
+            label: 'Pressure',
+            fill: false,
+            borderColor: "rgba(0,255,0,1.0)",
+        }, {
+            label: 'Approx. Altitude',
+            fill: false,
+            borderColor: "rgba(0,0,255,1.0)",
+        }]
+    },
+    options: {
+        legend: { display: false }
+    }
+});
 
 socket.on("new_data", data => {
     data_count += 1;
@@ -161,6 +186,15 @@ socket.on("new_data", data => {
     addData(chart_2, data_count, data.slice(6, 12));
     //history.addData(data, ++data_count)
 });
+socket.on("new_temp", data => {
+    temp_count += 1;
+    x_temp.push(temp_count);
+    for (let i = 0; i < 3; i++) {
+        chart_temp.data.datasets[i].data.push(data[i])
+    }
+    chart_temp.update();
+});
+
 
 function addData(chart, label, data) {
     //chart.data.labels.push(label);

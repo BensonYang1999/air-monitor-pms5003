@@ -39,7 +39,7 @@ app.get("/recv_data", (req, res) => {
     ]
 
     console.log(new_data);
-    data.push(new_data);
+    // data.push(new_data);
     io.emit("new_data", new_data);
     res.end();
 
@@ -56,6 +56,18 @@ app.get("/recv_data", (req, res) => {
     // var particles_50um = req.query.particles_50um;
     // var particles_100um = req.query.particles_100um;
 
+});
+
+app.get("/recv_temp", (req, res) => {
+    var new_data = [
+        parseInt(req.query.temperature),
+        parseInt(req.query.pressure),
+        parseInt(req.query.altitude)
+    ]
+    console.log(new_data);
+    // data.push(new_data);
+    io.emit("new_temp", new_data);
+    res.end();
 });
 
 io.sockets.on("connection", socket => {

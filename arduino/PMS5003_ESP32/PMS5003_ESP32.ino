@@ -1,10 +1,16 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
+#include <Wire.h>
+#include <Adafruit_Sensor.h>
+#include "Adafruit_BMP3XX.h"
 
 #define WIFI_SEND_URL "http://220.135.93.231:1234/recv_data"
+#define WIFI_TEMP_URL "http://220.135.93.231:1234/recv_temp"
+#define SEALEVELPRESSURE_HPA (1013.25)
 
 const char *ssid = "2.4G";
 const char *password = "12345qwert";
+Adafruit_BMP3XX bmp;
 
 WiFiServer server(80); // Set web server port number to 80
 
@@ -15,6 +21,18 @@ void setup()
 
   // sensor baud rate is 9600
   Serial2.begin(9600);
+
+  // test BMP388
+  if (!bmp.begin_I2C())
+  {
+    Serial.println("Could not find a valid BMP3 sensor, check wiring!");
+    while (1)
+      ;
+  }
+  bmp.setTemperatureOversampling(BMP3_OVERSAMPLING_8X);
+  bmp.setPressureOversampling(BMP3_OVERSAMPLING_4X);
+  bmp.setIIRFilterCoeff(BMP3_IIR_FILTER_COEFF_3);
+  bmp.setOutputDataRate(BMP3_ODR_50_HZ);
 
   // Connect to Wi-Fi network with SSID and password
   Serial.println("");
@@ -101,9 +119,45 @@ void loop()
       url += "&particles_50um=" + String(data.particles_50um);
       url += "&particles_100um=" + String(data.particles_100um);
 
-      Serial.println();
-      Serial.print("url:");
-      Serial.println(url);
+      // Serial.println();
+      // Serial.print("url:");
+      // Serial.println(url);
+      // Serial.println();
+
+      http.begin(url);
+      int httpCode = http.GET();
+      http.end();
+    }
+  }
+
+  if (bmp.performReading())
+  {
+    Serial.println();
+    Serial.print("Temperature = ");
+    Serial.print(bmp.temperature);
+    Serial.println(" *C");
+
+    Serial.print("Pressure = ");
+    Serial.print(bmp.pressure / 100.0);
+    Serial.println(" hPa");
+
+    Serial.print("Approx. Altitude = ");
+    Serial.print(bmp.readAltitude(SEALEVELPRESSURE_HPA));
+    Serial.println(" m");
+
+    Serial.println();
+
+    if (WiFi.status() == WL_CONNECTED)
+    {
+      String url = String(WIFI_TEMP_URL);
+      url += "?temperature=" + String(bmp.temperature);
+      url += "&pressure=" + String(bmp.pressure / 100.0);
+      url += "&altitude=" + String(bmp.readAltitude(SEALEVELPRESSURE_HPA));
+
+      // Serial.println();
+      // Serial.print("url:");
+      // Serial.println(url);
+      // Serial.println();
 
       http.begin(url);
       int httpCode = http.GET();
