@@ -111,30 +111,30 @@ const chart_2 = new Chart(ctx2, {
             fill: false,
             borderColor: "rgba(0,255,140,1.0)",
         }, */{
-            label: 'Particles > 0.3um (/100)',
-            fill: false,
-            borderColor: "rgba(0,255,255,1.0)",
-        }, {
-            label: 'Particles > 0.5um (/100)',
-            fill: false,
-            borderColor: "rgba(0,0,255,1.0)",
-        }, {
-            label: 'Particles > 1.0um (/10)',
-            fill: false,
-            borderColor: "rgba(110,0,255,1.0)",
-        }, {
-            label: 'Particles > 2.5um',
-            fill: false,
-            borderColor: "rgba(170,0,255,1.0)",
-        }, {
-            label: 'Particles > 5.0um',
-            fill: false,
-            borderColor: "rgba(255,0,255,1.0)",
-        }, {
-            label: 'Particles > 10.0 um',
-            fill: false,
-            borderColor: "rgba(255,0,150,1.0)",
-        }]
+                label: 'Particles > 0.3um (/100)',
+                fill: false,
+                borderColor: "rgba(0,255,255,1.0)",
+            }, {
+                label: 'Particles > 0.5um (/100)',
+                fill: false,
+                borderColor: "rgba(0,0,255,1.0)",
+            }, {
+                label: 'Particles > 1.0um (/10)',
+                fill: false,
+                borderColor: "rgba(110,0,255,1.0)",
+            }, {
+                label: 'Particles > 2.5um',
+                fill: false,
+                borderColor: "rgba(170,0,255,1.0)",
+            }, {
+                label: 'Particles > 5.0um',
+                fill: false,
+                borderColor: "rgba(255,0,255,1.0)",
+            }, {
+                label: 'Particles > 10.0 um',
+                fill: false,
+                borderColor: "rgba(255,0,150,1.0)",
+            }]
     },
     options: {
         legend: { display: false }/*,
@@ -206,3 +206,15 @@ function addData(chart, label, data) {
     }
     chart.update();
 }
+
+$(document).ready(function () {
+    $("#btn_clear").click(() => {
+        xValues = [];
+        data_count = 0;
+        x_temp = [];
+        temp_count = 0;
+        chart_1.update();
+        chart_2.update();
+        chart_temp.update();
+    });
+});
