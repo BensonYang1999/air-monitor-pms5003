@@ -156,13 +156,14 @@ const chart_2 = new Chart(ctx2, {
 
 socket.on("new_data", data => {
     data_count += 1;
+    xValues.push(data_count);
     addData(chart_1, data_count, data.slice(0, 6));
     addData(chart_2, data_count, data.slice(6, 12));
     //history.addData(data, ++data_count)
 });
 
 function addData(chart, label, data) {
-    chart.data.labels.push(label);
+    //chart.data.labels.push(label);
     /*chart.data.datasets.forEach((dataset) => {
         dataset.data.push(data);
     });*/
