@@ -1,4 +1,5 @@
 const express = require("express");
+const fs = require('fs');
 const app = express();
 const port = 1234;
 const server = require('http').createServer(app);
@@ -43,6 +44,7 @@ app.get("/recv_data", (req, res) => {
     io.emit("new_data", new_data);
     res.end();
 
+    fs.appendFile('history_air.txt', new_data[0]);
     // var pm10_standard = req.query.pm10_standard;
     // var pm25_standard = req.query.pm25_standard;
     // var pm100_standard = req.query.pm100_standard;
@@ -68,6 +70,8 @@ app.get("/recv_temp", (req, res) => {
     // data.push(new_data);
     io.emit("new_temp", new_data);
     res.end();
+
+    fs.appendFile('history_temp.txt', new_data[0]);
 });
 
 io.sockets.on("connection", socket => {

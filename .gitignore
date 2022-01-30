@@ -1,2 +1,4 @@
 website/node_modules
 website/package-lock.json
+website/history_air.txt
+website/history_temp.txt
