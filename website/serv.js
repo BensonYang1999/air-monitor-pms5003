@@ -9,7 +9,7 @@ var data = [];
 app.use(express.static(__dirname + "/public"));
 
 app.get("/recv_data", (req, res) => {
-    var new_data = {
+    /*var new_data = {
         pm10_standard: parseInt(req.query.pm10_standard),
         pm25_standard: parseInt(req.query.pm25_standard),
         pm100_standard: parseInt(req.query.pm100_standard),
@@ -22,7 +22,21 @@ app.get("/recv_data", (req, res) => {
         particles_25um: parseInt(req.query.particles_25um),
         particles_50um: parseInt(req.query.particles_50um),
         particles_100um: parseInt(req.query.particles_100um)
-    }
+    }*/
+    var new_data = [
+        parseInt(req.query.pm10_standard),
+        parseInt(req.query.pm25_standard),
+        parseInt(req.query.pm100_standard),
+        parseInt(req.query.pm10_env),
+        parseInt(req.query.pm25_env),
+        parseInt(req.query.pm100_env),
+        parseInt(req.query.particles_03um),
+        parseInt(req.query.particles_05um),
+        parseInt(req.query.particles_10um),
+        parseInt(req.query.particles_25um),
+        parseInt(req.query.particles_50um),
+        parseInt(req.query.particles_100um)
+    ]
 
     console.log(new_data);
     data.push(new_data);
