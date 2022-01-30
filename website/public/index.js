@@ -206,6 +206,14 @@ function addData(chart, label, data) {
     }
     chart.update();
 }
+function removeData(chart) {
+    chart.data.labels.pop();
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.pop();
+    });
+    chart.update();
+}
+
 
 $(document).ready(function () {
     $("#btn_clear").click(() => {
@@ -213,8 +221,14 @@ $(document).ready(function () {
         data_count = 0;
         x_temp = [];
         temp_count = 0;
-        chart_1.update();
-        chart_2.update();
-        chart_temp.update();
+        chart_1.data.datasets.forEach((dataset) => {
+            dataset.data = [];
+        });
+        chart_2.data.datasets.forEach((dataset) => {
+            dataset.data = [];
+        });
+        chart_temp.data.datasets.forEach((dataset) => {
+            dataset.data = [];
+        });
     });
 });
