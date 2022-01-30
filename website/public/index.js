@@ -54,15 +54,18 @@ var history = new Chart("myChart", {
 });
 
 socket.on("new_data", data => {
-    //data_count += 1;
-    //addData(history, data_count, data)
-    history.addData(data, ++data_count)
+    data_count += 1;
+    addData(history, data_count, data)
+    //history.addData(data, ++data_count)
 });
 
-/*function addData(chart, label, data) {
+function addData(chart, label, data) {
     chart.data.labels.push(label);
-    chart.data.datasets.forEach((dataset) => {
+    /*chart.data.datasets.forEach((dataset) => {
         dataset.data.push(data);
-    });
+    });*/
+    for (let i=0; i < 12; i++) {
+        chart.data.datasets[i].data.push(data[i])
+    }
     chart.update();
-}*/
+}
