@@ -60,9 +60,9 @@ app.get("/recv_data", (req, res) => {
 
 app.get("/recv_temp", (req, res) => {
     var new_data = [
-        parseInt(req.query.temperature),
-        parseInt(req.query.pressure),
-        parseInt(req.query.altitude)
+        parseFloat(req.query.temperature),
+        parseFloat(req.query.pressure) / 100,
+        parseFloat(req.query.altitude)
     ]
     console.log(new_data);
     // data.push(new_data);

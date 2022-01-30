@@ -161,15 +161,15 @@ const chart_temp = new Chart(ctx_temp, {
     data: {
         labels: x_temp,
         datasets: [{
-            label: 'Temperature',
+            label: 'Temperature (*C)',
             fill: false,
             borderColor: "rgba(255,0,0,1.0)",
         }, {
-            label: 'Pressure',
+            label: 'Pressure (hPa) (/100)',
             fill: false,
             borderColor: "rgba(0,255,0,1.0)",
         }, {
-            label: 'Approx. Altitude',
+            label: 'Approx. Altitude (m)',
             fill: false,
             borderColor: "rgba(0,0,255,1.0)",
         }]
