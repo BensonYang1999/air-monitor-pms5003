@@ -166,7 +166,7 @@ function addData(chart, label, data) {
     /*chart.data.datasets.forEach((dataset) => {
         dataset.data.push(data);
     });*/
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 6; i++) {
         chart.data.datasets[i].data.push(data[i])
     }
     chart.update();
