@@ -179,9 +179,9 @@ var config_temp = {
     }
 };
 
-const chart_1 = new Chart(ctx1, config_1);
-const chart_2 = new Chart(ctx2, config_2);
-const chart_temp = new Chart(ctx_temp, config_temp);
+var chart_1 = new Chart(ctx1, config_1);
+var chart_2 = new Chart(ctx2, config_2);
+var chart_temp = new Chart(ctx_temp, config_temp);
 
 socket.on("new_data", data => {
     data_count += 1;
@@ -234,11 +234,17 @@ $(document).ready(function () {
         chart_temp.data.datasets.forEach((dataset) => {
             dataset.data = [];
         });*/
-        chart_1.data = config_1['data'];
+        chart_1.destroy();
+        chart_2.destroy();
+        chart_temp.destroy();
+        /*chart_1.data = config_1['data'];
         chart_2.data = config_2['data'];
         chart_temp.data = config_temp['data'];
         chart_1.update();
         chart_2.update();
-        chart_temp.update();
+        chart_temp.update();*/
+        chart_1 = new Chart(ctx1, config_1);
+        chart_2 = new Chart(ctx2, config_2);
+        chart_temp = new Chart(ctx_temp, config_temp);
     });
 });
