@@ -8,7 +8,7 @@ var temp_count = 0;
 const ctx_temp = document.getElementById('Chart_temp').getContext('2d');
 const ctx1 = document.getElementById('Chart1').getContext('2d');
 const ctx2 = document.getElementById('Chart2').getContext('2d');
-const chart_1 = new Chart(ctx1, {
+var config_1 = {
     type: "line",
     data: {
         labels: xValues,
@@ -81,8 +81,8 @@ const chart_1 = new Chart(ctx1, {
             }
         }*/
     }
-});
-const chart_2 = new Chart(ctx2, {
+};
+var config_2 = {
     type: "line",
     data: {
         labels: xValues,
@@ -155,8 +155,8 @@ const chart_2 = new Chart(ctx2, {
             }
         }*/
     }
-});
-const chart_temp = new Chart(ctx_temp, {
+};
+var config_temp = {
     type: "line",
     data: {
         labels: x_temp,
@@ -177,7 +177,11 @@ const chart_temp = new Chart(ctx_temp, {
     options: {
         legend: { display: false }
     }
-});
+};
+
+const chart_1 = new Chart(ctx1, config_1);
+const chart_2 = new Chart(ctx2, config_2);
+const chart_temp = new Chart(ctx_temp, config_temp);
 
 socket.on("new_data", data => {
     data_count += 1;
@@ -221,7 +225,7 @@ $(document).ready(function () {
         data_count = 0;
         x_temp = [];
         temp_count = 0;
-        chart_1.data.datasets.forEach((dataset) => {
+        /*chart_1.data.datasets.forEach((dataset) => {
             dataset.data = [];
         });
         chart_2.data.datasets.forEach((dataset) => {
@@ -229,6 +233,12 @@ $(document).ready(function () {
         });
         chart_temp.data.datasets.forEach((dataset) => {
             dataset.data = [];
-        });
+        });*/
+        chart_1.data = config_1['data'];
+        chart_2.data = config_2['data'];
+        chart_temp.data = config_temp['data'];
+        chart_1.update();
+        chart_2.update();
+        chart_temp.update();
     });
 });
