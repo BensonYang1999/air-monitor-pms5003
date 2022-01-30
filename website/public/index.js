@@ -3,7 +3,8 @@ const socket = io.connect(window.location.origin);
 var xValues = []
 var data_count = 0;
 
-var history = new Chart("myChart", {
+const ctx = document.getElementById('myChart').getContext('2d');
+var history = new Chart(ctx, {
     type: "line",
     data: {
         labels: xValues,
@@ -54,9 +55,9 @@ var history = new Chart("myChart", {
 });
 
 socket.on("new_data", data => {
-    /*data_count += 1;
-    addData(history, data_count, data)*/
-    history.addData(data, ++data_count)
+    data_count += 1;
+    addData(history, data_count, data)
+    //history.addData(data, ++data_count)
 });
 
 function addData(chart, label, data) {
