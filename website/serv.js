@@ -44,7 +44,8 @@ app.get("/recv_data", (req, res) => {
     io.emit("new_data", new_data);
     res.end();
 
-    fs.appendFile('history_air.txt', String(new_data) + "\n", function (err) {
+    var time = getnowtime();
+    fs.appendFile('history_air.txt', time + "," + String(new_data) + "\n", function (err) {
         if (err) throw err;
         // console.log('Saved!');
     });
@@ -74,7 +75,8 @@ app.get("/recv_temp", (req, res) => {
     io.emit("new_temp", new_data);
     res.end();
 
-    fs.appendFile('history_temp.txt', String(new_data) + "\n", function (err) {
+    var time = getnowtime();
+    fs.appendFile('history_temp.txt', time + "," + String(new_data) + "\n", function (err) {
         if (err) throw err;
         // console.log('Saved!');
     });
@@ -87,3 +89,17 @@ io.sockets.on("connection", socket => {
 
 
 server.listen(port, () => console.log(`Server is running on port ${port}`));
+
+
+function getnowtime() {
+    let date_ob = new Date();
+    let date = ("0" + date_ob.getDate()).slice(-2);
+    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+    let year = date_ob.getFullYear();
+    let hours = date_ob.getHours();
+    let minutes = date_ob.getMinutes();
+    let seconds = date_ob.getSeconds();
+    var total = String(year) + "-" + String(month) + "-" + String(date) + "-";
+    total += String(hours) + "-" + String(minutes) + "-" + String(seconds);
+    return total;
+}

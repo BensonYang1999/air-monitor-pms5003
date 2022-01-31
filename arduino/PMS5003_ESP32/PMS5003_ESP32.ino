@@ -165,7 +165,7 @@ void loop()
     }
   }
 
-  delay(2000);
+  delay(10000);
 }
 
 boolean readPMSdata(Stream *s)
